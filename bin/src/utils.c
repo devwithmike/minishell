@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 08:52:50 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/06 10:33:38 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/06 15:20:22 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,36 +24,21 @@ void	free_er(char **str)
 void	print_path(void)
 {
 	char cwd[1024];
+	char *ptr;
 	
+	ft_putstr("\033[1;35m");
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
-		ft_putstr(cwd);
-}
-
-void	pop_env(char **env)
-{
-	int i;
-
-	i = 0;
-	while (env[i] != NULL)
-		i++;
-	m_env = (char **)malloc((sizeof(char *) * (i + 1)));
-	i = 0;
-	while (env[i] != NULL)
 	{
-		m_env[i] = ft_strdup(env[i]);
-		i++;
+		if (ft_strcmp(cwd, "/") == 0)
+			ft_putchar('/');
+		else if (ft_strcmp(cwd, "~") == 0)
+			ft_putchar('~');
+		else
+		{
+			ptr = ft_strsub(cwd, ft_strlen(home), ft_strlen(cwd));
+			ft_putchar('~');
+			ft_putstr(ptr);
+			free(ptr);
+		}
 	}
-}
-
-int		print_env(void)
-{
-	int i;
-
-	i = 0;
-	while (m_env[i])
-	{
-		ft_putendl(m_env[i]);
-		i++;
-	}
-	return (1);
 }

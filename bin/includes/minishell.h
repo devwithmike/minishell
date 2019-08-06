@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:25:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/06 12:12:20 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/06 15:41:11 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,17 @@
 # include <readline/readline.h>
 
 char	**m_env;
+char	*home;
 
 int		execute_args(char **cmds);
 int		check_sys(char **cmds);
 int		exec_cd(char *cmd);
-void	exec_cd_home(void);
 void	free_er(char **str);
 void	print_path(void);
 int		print_env(void);
+void	get_home(char *path);
 void	pop_env(char **env);
+int		home_path_len(void);
+void	reset_env(char *key, char *value);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:26:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/06 10:32:59 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/06 15:21:06 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int check_sys(char **cmds)
 		return (exec_cd(cmds[0]));
 	else if (ft_strnequ(cmds[0], "env", 3))
 		return (print_env());
+	// else
+	// 	return (exec_sys(cmds));
 	return (0);
 }
 
@@ -47,12 +49,11 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	i = 1;
-	system("clear");
 	pop_env(env);
 	while (i)
 	{
 		print_path();
-		line = readline("$>");
+		line = readline("$>\033[0m");
 		add_history(line);
 		commands = ft_strsplit(line, ';');
 		free(line);
