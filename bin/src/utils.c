@@ -6,13 +6,13 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 08:52:50 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/06 09:31:32 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/06 10:33:38 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void free_er(char **str)
+void	free_er(char **str)
 {
 	int	i;
 	i = 0;
@@ -21,7 +21,7 @@ void free_er(char **str)
 	free(str);
 }
 
-void get_path(void)
+void	print_path(void)
 {
 	char cwd[1024];
 	
@@ -29,12 +29,31 @@ void get_path(void)
 		ft_putstr(cwd);
 }
 
-int print_env(char **env)
+void	pop_env(char **env)
 {
-	while (*env)
+	int i;
+
+	i = 0;
+	while (env[i] != NULL)
+		i++;
+	m_env = (char **)malloc((sizeof(char *) * (i + 1)));
+	i = 0;
+	while (env[i] != NULL)
 	{
-		ft_putendl(*env);
-		env++;
+		m_env[i] = ft_strdup(env[i]);
+		i++;
+	}
+}
+
+int		print_env(void)
+{
+	int i;
+
+	i = 0;
+	while (m_env[i])
+	{
+		ft_putendl(m_env[i]);
+		i++;
 	}
 	return (1);
 }
