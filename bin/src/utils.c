@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/05 09:25:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/06 09:31:40 by mimeyer          ###   ########.fr       */
+/*   Created: 2019/08/06 08:52:50 by mimeyer           #+#    #+#             */
+/*   Updated: 2019/08/06 09:31:32 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
+#include "../includes/minishell.h"
 
-# include "../libft/libft.h"
-# include <readline/history.h>
-# include <readline/readline.h>
+void free_er(char **str)
+{
+	int	i;
+	i = 0;
+	while (str[i])
+		ft_strdel(&str[i++]);
+	free(str);
+}
 
-int execute_args(char **cmds, char **env);
-int check_sys(char **cmds, char **env);
-int exec_cd(char *cmd);
-void free_er(char **str);
-void get_path(void);
-int print_env(char **env);
+void get_path(void)
+{
+	char cwd[1024];
+	
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+		ft_putstr(cwd);
+}
 
-#endif
+int print_env(char **env)
+{
+	while (*env)
+	{
+		ft_putendl(*env);
+		env++;
+	}
+	return (1);
+}

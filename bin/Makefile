@@ -4,7 +4,9 @@ LIBFT_PATH = ./libft/
 
 SRC_PATH = ./src/
 
-SRCS =	minishell.c
+SRCS =	minishell.c \
+		programs.c \
+		utils.c
 
 FLAGS = -Wall -Werror -Wextra
 
