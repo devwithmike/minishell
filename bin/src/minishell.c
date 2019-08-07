@@ -6,22 +6,22 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:26:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/07 09:17:50 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/07 09:23:10 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int check_sys(char **cmds)
+int check_sys(char *cmd)
 {
-	if (ft_strnequ(cmds[0], "exit", 4))
+	if (ft_strnequ(cmd, "exit", 4))
 		return (-1);
-	else if (ft_strnequ(cmds[0], "cd", 2))
-		return (exec_cd(cmds[0]));
-	else if (ft_strnequ(cmds[0], "env", 3))
+	else if (ft_strnequ(cmd, "cd", 2))
+		return (exec_cd(cmd));
+	else if (ft_strnequ(cmd, "env", 3))
 		return (print_env());
 	else
-		return (exec_sys(cmds));
+		return (exec_sys(cmd));
 	return (0);
 }
 
@@ -32,7 +32,7 @@ int execute_args(char **cmds)
 	i = 0;
 	while (cmds[i] != NULL)
 	{
-		if (check_sys(cmds) == -1)
+		if (check_sys(cmds[i]) == -1)
 			return (0);
 		else
 			i++;

@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:29:35 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/07 08:22:46 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/07 11:31:51 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	pop_env(char **env)
 		get_home(env[i]);
 		i++;
 	}
+	get_path();
 }
 
 void	reset_env(char *key, char *value)
@@ -60,6 +61,22 @@ void	get_home(char *path)
 	{
 		len  = ft_strlen(path);
 		home = ft_strsub(path, 5, len - 5);
+	}
+}
+
+void	get_path(void)
+{
+	int i;
+
+	i = 0;
+	while (m_env[i])
+	{
+		if (ft_strncmp(m_env[i], "PATH=", 5) == 0)
+		{
+			path = ft_strsub(m_env[i], 5, ft_strlen(m_env[i]) - 5);
+			break ;
+		}
+		i++;
 	}
 }
 
