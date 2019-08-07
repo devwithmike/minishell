@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 08:52:50 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/06 15:20:22 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/07 15:16:07 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	print_path(void)
 	{
 		if (ft_strcmp(cwd, "/") == 0)
 			ft_putchar('/');
-		else if (ft_strcmp(cwd, "~") == 0)
-			ft_putchar('~');
+		else if (ft_strcmp(cwd, home) == 0)
+			ft_putstr("~/");
 		else
 		{
 			ptr = ft_strsub(cwd, ft_strlen(home), ft_strlen(cwd));
