@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:25:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/06 15:41:11 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/07 08:31:51 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ void	get_home(char *path);
 void	pop_env(char **env);
 int		home_path_len(void);
 void	reset_env(char *key, char *value);
+void exec_prev(void);
 
 #endif
