@@ -7,7 +7,8 @@ SRC_PATH = ./src/
 SRCS =	minishell.c \
 		cd.c \
 		utils.c \
-		env.c
+		env.c \
+		sys.c
 
 FLAGS = -Wall -Werror -Wextra
 
