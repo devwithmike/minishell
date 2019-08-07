@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:26:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/07 15:10:35 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/07 15:45:09 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int main(int ac, char **av, char **env)
 	while (i)
 	{
 		print_path();
-		line = readline(" \033[1;36m(master)\033[0m\033[1;32m $>\033[0m");
+		line = readline("$>\033[0m");
 		add_history(line);
 		commands = ft_strsplit(line, ';');
 		free(line);
