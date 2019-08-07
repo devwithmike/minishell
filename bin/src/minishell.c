@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:26:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/07 15:45:09 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/07 15:57:54 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int check_sys(char *cmd)
 {
 	if (ft_strnequ(cmd, "exit", 4))
+	{
+		ft_putendl("\033[1;36mGoodbye \U0001F60A\033[0m");
 		return (-1);
+	}
 	else if (ft_strnequ(cmd, "cd", 2))
 		return (exec_cd(cmd));
 	else if (ft_strnequ(cmd, "env", 3))
