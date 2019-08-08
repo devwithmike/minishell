@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:25:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/08 14:57:55 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/08 15:26:06 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ int		exec_sys(char *cmds);
 void	get_path(void);
 int		exec_echo(char *cmd);
 int		set_env(char *cmd);
+int		unset_env(char *cmd);
 
 #endif

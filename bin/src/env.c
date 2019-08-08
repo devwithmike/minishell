@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:29:35 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/08 15:15:08 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/08 15:24:00 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,24 @@ int		set_env(char *cmd)
 	pop_env(temp);
 	free_er(temp);
 	return (1);
+}
+
+int		unset_env(char *cmd)
+{
+	char **values;
+	int i;
+
+	i = 0;
+	values = ft_strsplit(cmd, ' ');
+	while (m_env[i])
+	{
+		if (ft_strncmp(m_env[i], values[1], ft_strlen(values[1])) == 0)
+		{
+			ft_strdel(&m_env[i]);
+			free_er(values);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }
