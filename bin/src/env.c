@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:29:35 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/07 11:31:51 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/08 15:15:08 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	pop_env(char **env)
 	get_path();
 }
 
-void	reset_env(char *key, char *value)
+int		reset_env(char *key, char *value)
 {
 	int i;
 	char *temp_key;
@@ -47,37 +47,11 @@ void	reset_env(char *key, char *value)
 			m_env[i] = ft_strdup(temp);
 			free(temp_key);
 			free(temp);
-			break ;
+			return (1);
 		}
 		i++;
 	}
-}
-
-void	get_home(char *path)
-{
-	int len;
-
-	if (ft_strncmp(path, "HOME=", 5) == 0)
-	{
-		len  = ft_strlen(path);
-		home = ft_strsub(path, 5, len - 5);
-	}
-}
-
-void	get_path(void)
-{
-	int i;
-
-	i = 0;
-	while (m_env[i])
-	{
-		if (ft_strncmp(m_env[i], "PATH=", 5) == 0)
-		{
-			path = ft_strsub(m_env[i], 5, ft_strlen(m_env[i]) - 5);
-			break ;
-		}
-		i++;
-	}
+	return (0);
 }
 
 int		print_env(void)
@@ -90,5 +64,43 @@ int		print_env(void)
 		ft_putendl(m_env[i]);
 		i++;
 	}
+	return (1);
+}
+
+int		set_env(char *cmd)
+{
+	int i;
+	char **temp;
+	char **values;
+	char *temp_key;
+	char *temp_rule;
+
+	i = 0;
+	values = ft_strsplit(cmd, ' ');
+	if (reset_env(values[1], values[2]))
+	{
+		free_er(values);
+		return (1);
+	}
+	while (m_env[i])
+		i++;
+	temp = (char **)malloc((sizeof(char *) * (i + 2)));
+	i = 0;
+	while (m_env[i])
+	{
+		temp[i] = ft_strdup(m_env[i]);
+		i++;
+	}
+	temp_key = ft_strjoin(values[1], "=");
+	temp_rule = ft_strjoin(temp_key, values[2]);
+	free(temp_key);
+	free_er(values);
+	temp[i] = ft_strdup(temp_rule);
+	free(temp_rule);
+	free_er(m_env);
+	free(home);
+	free(path);
+	pop_env(temp);
+	free_er(temp);
 	return (1);
 }

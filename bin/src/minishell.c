@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:26:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/07 15:57:54 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/08 15:09:43 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int check_sys(char *cmd)
 		return (exec_cd(cmd));
 	else if (ft_strnequ(cmd, "env", 3))
 		return (print_env());
+	else if (ft_strnequ(cmd, "setenv", 6))
+		return (set_env(cmd));
 	else if (ft_strnequ(cmd, "echo", 4))
 		return (exec_echo(cmd));
 	else
