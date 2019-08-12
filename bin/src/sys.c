@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 08:57:50 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/08 15:05:38 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/12 14:06:36 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,14 @@ int exec_sys(char *cmd)
 				execve(func_p, av, m_env);
 			waitpid(pid, &status, WUNTRACED);
 			free(func_p);
-			break ;
+			free_er(av);
+			free_er(path_t);
+			return (1);
 		}
 		free(func_p);
 		i++;
 	}
 	free_er(av);
 	free_er(path_t);
-	return (1);
+	return (0);
 }

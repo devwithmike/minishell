@@ -1,30 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/07 13:37:22 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/12 14:44:34 by mimeyer          ###   ########.fr       */
+/*   Created: 2019/08/12 14:15:05 by mimeyer           #+#    #+#             */
+/*   Updated: 2019/08/12 14:22:31 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int exec_echo(char **cmd)
-{
-	int i;
-
-	i = 1;
-	while (cmd[i])
-	{
-		if (cmd[i + 1] == NULL)
-			ft_putendl(cmd[i]);
-		else
-			ft_putstr(cmd[i]);
-		i++;
-	}
-	free_er(cmd);
-	return (1);
-}

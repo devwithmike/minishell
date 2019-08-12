@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:25:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/12 12:20:18 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/12 14:39:36 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ char	*home;
 char	*path;
 
 int		execute_args(char **cmds);
-int		check_sys(char *cmd);
-int		exec_cd(char *cmd);
+int		check_sys(char **cmd);
+int		exec_cd(char **cmd);
 void	free_er(char **str);
 void	print_path(void);
 int		print_env(void);
@@ -35,7 +35,7 @@ int		reset_env(char *key, char *value);
 void	exec_prev(void);
 int		exec_sys(char *cmds);
 void	get_path(void);
-int		exec_echo(char *cmd);
+int		exec_echo(char **cmd);
 int		set_env(char *cmd);
 int		unset_env(char *cmd);
 char	*end_quote(char *str, char q);
