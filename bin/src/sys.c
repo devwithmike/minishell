@@ -6,45 +6,58 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 08:57:50 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/12 14:06:36 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/12 15:35:21 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int exec_sys(char *cmd)
+int exec_sys(char **cmd)
 {
-	pid_t pid;
-	char **path_t;
-	char *func_p;
-	char *func_t;
-	int status;
-	char **av;
-	int i = 0;
-	struct stat	sb;
+	char		*temp;
+	struct stat	info;
+	char *path;
 
-	status = 1;
-	path_t = ft_strsplit(path, ':');
-	av = ft_strsplit(cmd, ' ');
-	while (path_t[i])
+	path = get_path(cmd[0]);
+	if (path != NULL && cmd[0][0] != '~')
+		return (sys_call(cmd, path));
+	if (lstat(cmd[0], &info) != -1)
 	{
-		func_t = ft_strjoin("/", av[0]);
-		func_p = ft_strjoin(path_t[i], func_t);
-		free(func_t);
-		if (lstat(func_p, &sb) == 0)
+		if (S_ISREG(info.st_mode))
 		{
-			if (!(pid = fork()))
-				execve(func_p, av, m_env);
-			waitpid(pid, &status, WUNTRACED);
-			free(func_p);
-			free_er(av);
-			free_er(path_t);
-			return (1);
+			temp = ft_strdup(cmd[0]);
+			return(sys_call(cmd, temp));
 		}
-		free(func_p);
-		i++;
 	}
-	free_er(av);
-	free_er(path_t);
+	ft_putstr("minishell: command not found: ");
+	ft_putendl(cmd[0]);
+	if (cmd)
+		free_er(cmd);
 	return (0);
+}
+
+int				sys_call(char **cmd, char *path)
+{
+	pid_t		pid;
+
+	pid = fork();
+	if (!pid)
+	{
+		if (execve(path, cmd, m_env) == -1)
+		{
+			ft_putstr("minishell: premission denied: ");
+			ft_putendl(path);
+		}
+	}
+	else if (pid < 0)
+	{
+		ft_putstr("minishell: unable to fork process:");
+		ft_putnbr(pid);
+		ft_putchar('\n');
+	}
+	else
+		wait(&pid);
+	free(path);
+	free_er(cmd);
+	return (1);
 }

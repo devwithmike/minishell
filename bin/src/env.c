@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:29:35 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/08 15:24:00 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/12 15:23:12 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	pop_env(char **env)
 		get_home(env[i]);
 		i++;
 	}
-	get_path();
 }
 
 int		reset_env(char *key, char *value)
@@ -54,7 +53,7 @@ int		reset_env(char *key, char *value)
 	return (0);
 }
 
-int		print_env(void)
+int		print_env(char **cmd)
 {
 	int i;
 
@@ -64,22 +63,21 @@ int		print_env(void)
 		ft_putendl(m_env[i]);
 		i++;
 	}
+	free_er(cmd);
 	return (1);
 }
 
-int		set_env(char *cmd)
+int		set_env(char **cmd)
 {
 	int i;
 	char **temp;
-	char **values;
 	char *temp_key;
 	char *temp_rule;
 
 	i = 0;
-	values = ft_strsplit(cmd, ' ');
-	if (reset_env(values[1], values[2]))
+	if (reset_env(cmd[1], cmd[2]))
 	{
-		free_er(values);
+		free_er(cmd);
 		return (1);
 	}
 	while (m_env[i])
@@ -91,33 +89,30 @@ int		set_env(char *cmd)
 		temp[i] = ft_strdup(m_env[i]);
 		i++;
 	}
-	temp_key = ft_strjoin(values[1], "=");
-	temp_rule = ft_strjoin(temp_key, values[2]);
+	temp_key = ft_strjoin(cmd[1], "=");
+	temp_rule = ft_strjoin(temp_key, cmd[2]);
 	free(temp_key);
-	free_er(values);
+	free_er(cmd);
 	temp[i] = ft_strdup(temp_rule);
 	free(temp_rule);
 	free_er(m_env);
 	free(home);
-	free(path);
 	pop_env(temp);
 	free_er(temp);
 	return (1);
 }
 
-int		unset_env(char *cmd)
+int		unset_env(char **cmd)
 {
-	char **values;
 	int i;
 
 	i = 0;
-	values = ft_strsplit(cmd, ' ');
 	while (m_env[i])
 	{
-		if (ft_strncmp(m_env[i], values[1], ft_strlen(values[1])) == 0)
+		if (ft_strncmp(m_env[i], cmd[1], ft_strlen(cmd[1])) == 0)
 		{
 			ft_strdel(&m_env[i]);
-			free_er(values);
+			free_er(cmd);
 			return (1);
 		}
 		i++;

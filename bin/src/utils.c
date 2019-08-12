@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 08:52:50 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/12 12:22:04 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/12 15:27:48 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,62 @@ void	get_home(char *path)
 	}
 }
 
-void	get_path(void)
+char			*do_path(char *bin, char *com)
 {
-	int i;
+	char		*temp;
+	char		*path;
+
+	if (ft_strstr(bin, com) != NULL)
+		path = ft_strdup(com);
+	else
+	{
+		temp = ft_strjoin(bin, "/");
+		path = ft_strjoin(temp, com);
+		ft_strdel(&temp);
+	}
+	return (path);
+}
+
+char			*get_env(char *str)
+{
+	int			i;
 
 	i = 0;
 	while (m_env[i])
 	{
-		if (ft_strncmp(m_env[i], "PATH=", 5) == 0)
-		{
-			path = ft_strsub(m_env[i], 5, ft_strlen(m_env[i]) - 5);
-			break ;
-		}
+		if (ft_strncmp(str, m_env[i], ft_strlen(str)) == 0)
+			return (ft_strdup(ft_strchr(m_env[i], '=') + 1));
 		i++;
 	}
+	return (NULL);
+}
+
+char			*get_path(char *com)
+{
+	int			i;
+	char		*temp;
+	char		**bin;
+	char		*path;
+	struct stat	info;
+
+	i = -1;
+	temp = get_env("PATH=");
+	bin = ft_strsplit(temp, ':');
+	ft_strdel(&temp);
+	while (bin && bin[++i])
+	{
+		path = do_path(bin[i], com);
+		if (lstat(path, &info) == -1)
+			free(path);
+		else
+		{
+			free_er(bin);
+			return (path);
+		}
+	}
+	if (bin != NULL)
+		free_er(bin);
+	return (NULL);
 }
 
 char			*end_quote(char *str, char q)
