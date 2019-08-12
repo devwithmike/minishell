@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 08:52:50 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/08 14:30:51 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/12 12:22:04 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,33 @@ void	get_path(void)
 		}
 		i++;
 	}
+}
+
+char			*end_quote(char *str, char q)
+{
+	char		*ptr;
+	char		*temp;
+	char		*str2;
+
+	ptr = str;
+	while ((ptr = ft_strchr(ptr, q)) != NULL)
+	{
+		ptr++;
+		if ((ptr = ft_strchr(ptr, q)) == NULL)
+		{
+			if (q == '"')
+				str2 = readline("\033[1;35mdquote$>\033[0m");
+			else
+				str2 = readline("\033[1;35mquote$>\033[0m");
+			temp = ft_strjoin(str, "\n");
+			ft_strdel(&str);
+			str = ft_strjoin(temp, str2);
+			ft_strdel(&str2);
+			ft_strdel(&temp);
+			ptr = str;
+		}
+		else
+			ptr++;
+	}
+	return (str);
 }

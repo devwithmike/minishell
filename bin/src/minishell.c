@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:26:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/08 15:26:51 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/12 12:51:01 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int check_sys(char *cmd)
 {
 	if (ft_strnequ(cmd, "exit", 4))
-	{
-		ft_putendl("\033[1;36mGoodbye \U0001F60A\033[0m");
+	// {
+	// 	ft_putendl("\033[1;36mGoodbye \U0001F60A\033[0m");
 		return (-1);
-	}
+	// }
 	else if (ft_strnequ(cmd, "cd", 2))
 		return (exec_cd(cmd));
 	else if (ft_strnequ(cmd, "env", 3))
@@ -49,6 +49,11 @@ int execute_args(char **cmds)
 	return (1);
 }
 
+// char *get_quotes(char **line)
+// {
+
+// }
+
 int main(int ac, char **av, char **env)
 {
 	int i;
@@ -63,7 +68,12 @@ int main(int ac, char **av, char **env)
 	{
 		print_path();
 		line = readline("$>\033[0m");
+		if (ft_strchr(line, '"') != NULL)
+			line = end_quote(line, '"');
+		else if (ft_strchr(line, '\'') != NULL)
+			line = end_quote(line, '\'');
 		add_history(line);
+		//line = ft_strsub(line, 2, ft_strlen(line) - 1);
 		commands = ft_strsplit(line, ';');
 		free(line);
 		i = execute_args(commands);
