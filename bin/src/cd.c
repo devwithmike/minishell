@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 08:29:40 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/15 15:23:47 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/15 15:42:27 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,14 @@ int		exec_cd(char **cmd)
 int		exec_tilda(char **cmd)
 {
 	char	*home;
-	char	*dir;
 	char	*temp;
 	char	*path;
 
 	home = get_env("HOME=");
 	if (ft_strlen(cmd[0]) > 1)
 	{
-		dir = ft_strdup(cmd[0] + 1);
-		temp = ft_strjoin(home, "/");
-		path = ft_strjoin(temp, dir);
-		free(dir);
+		temp = ft_strsub(cmd[0], 1, ft_strlen(cmd[0]) - 1);
+		path = ft_strjoin(home, temp);
 		free(temp);
 		free(home);
 		exec_path(path);
