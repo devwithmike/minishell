@@ -6,20 +6,31 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 08:29:40 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/15 15:42:27 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/15 16:02:26 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		exec_path(char *path)
+void	exec_path(char *path)
 {
 	char	cwd[1024];
 
 	reset_env("OLDPWD", getcwd(cwd, sizeof(cwd)));
 	if (chdir(path) != 0)
 		ft_putstr("PATH JUST BROKE\n");
-	return (1);
+}
+
+void	exec_env(char **cmd)
+{
+	char *temp;
+	char *env;
+
+	temp = ft_strsub(cmd[1], 1, ft_strlen(cmd[1]) - 1);
+	env = get_env(temp);
+	exec_path(env);
+	free(temp);
+	free(env);
 }
 
 int		exec_cd(char **cmd)
@@ -31,6 +42,8 @@ int		exec_cd(char **cmd)
 	home = get_env("HOME=");
 	if (cmd[1] == NULL || (ft_strcmp(cmd[1], "~") == 0))
 		exec_path(home);
+	else if (cmd[1][0] == '$')
+		exec_env(cmd);
 	else if ((ft_strchr(cmd[1], '~') != NULL) && (ft_strlen(cmd[1]) > 1))
 	{
 		reset_env("OLDPWD", getcwd(cwd, sizeof(cwd)));
