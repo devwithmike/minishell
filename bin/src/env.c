@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:29:35 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/12 15:23:12 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/14 08:15:29 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	pop_env(char **env)
 	while (env[i])
 	{
 		m_env[i] = ft_strdup(env[i]);
-		get_home(env[i]);
 		i++;
 	}
 }
@@ -96,7 +95,6 @@ int		set_env(char **cmd)
 	temp[i] = ft_strdup(temp_rule);
 	free(temp_rule);
 	free_er(m_env);
-	free(home);
 	pop_env(temp);
 	free_er(temp);
 	return (1);

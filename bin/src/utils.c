@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 08:52:50 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/12 15:27:48 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/15 14:39:04 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void	print_path(void)
 {
 	char cwd[1024];
 	char *ptr;
+	char *home;
 	
+	home = get_env("HOME=");
 	ft_putstr("\033[1;35m");
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
@@ -41,17 +43,7 @@ void	print_path(void)
 			free(ptr);
 		}
 	}
-}
-
-void	get_home(char *path)
-{
-	int len;
-
-	if (ft_strncmp(path, "HOME=", 5) == 0)
-	{
-		len  = ft_strlen(path);
-		home = ft_strsub(path, 5, len - 5);
-	}
+	free(home);
 }
 
 char			*do_path(char *bin, char *com)

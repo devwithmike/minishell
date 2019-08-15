@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:26:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/12 14:53:38 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/15 14:30:04 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int check_sys(char **cmd)
 		return (unset_env(cmd));
 	else if (ft_strequ(cmd[0], "echo"))
 		return (exec_echo(cmd));
+	else if (cmd[0][0] == '~')
+		return (exec_tilda(cmd));
 	else if (exec_sys(cmd) == 1)
 		return (1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:25:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/12 15:38:11 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/15 14:29:12 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@
 # include <sys/stat.h>
 
 char	**m_env;
-char	*home;
 
 int		execute_args(char **cmds);
+int		exec_tilda(char **cmd);
 int		check_sys(char **cmd);
 int		exec_cd(char **cmd);
 void	free_er(char **str);
 void	print_path(void);
 int		print_env(char **cmd);
-void	get_home(char *path);
 void	pop_env(char **env);
 int		home_path_len(void);
 int		reset_env(char *key, char *value);
@@ -41,6 +40,5 @@ char	*end_quote(char *str, char q);
 int		sys_call(char **cmd, char *path);
 char	*do_path(char *bin, char *com);
 char	*get_env(char *str);
-
 
 #endif
