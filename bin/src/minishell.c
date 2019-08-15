@@ -6,13 +6,13 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:26:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/15 14:30:04 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/15 14:55:13 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int check_sys(char **cmd)
+int		check_sys(char **cmd)
 {
 	if (ft_strequ(cmd[0], "exit"))
 		return (-1);
@@ -33,10 +33,10 @@ int check_sys(char **cmd)
 	return (0);
 }
 
-char			**remove_quotes(char *str)
+char	**remove_quotes(char *str)
 {
-	int			i;
-	char		**ret;
+	int		i;
+	char	**ret;
 
 	i = 0;
 	while (str[i])
@@ -55,10 +55,10 @@ char			**remove_quotes(char *str)
 	return (ret);
 }
 
-int execute_args(char **cmds)
+int		execute_args(char **cmds)
 {
-	int i;
-	char **args;
+	int		i;
+	char	**args;
 
 	i = 0;
 	while (cmds[i])
@@ -72,11 +72,11 @@ int execute_args(char **cmds)
 	return (1);
 }
 
-int main(int ac, char **av, char **env)
+int		main(int ac, char **av, char **env)
 {
-	int i;
-	char *line;
-	char **commands;
+	int		i;
+	char	*line;
+	char	**commands;
 
 	(void)ac;
 	(void)av;

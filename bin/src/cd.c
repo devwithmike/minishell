@@ -6,25 +6,31 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 08:29:40 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/15 14:39:12 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/15 15:23:47 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int exec_cd(char **cmd)
+int		exec_path(char *path)
 {
-	char *dir;
-	char cwd[1024];
-	char *home;
+	char	cwd[1024];
+
+	reset_env("OLDPWD", getcwd(cwd, sizeof(cwd)));
+	if (chdir(path) != 0)
+		ft_putstr("PATH JUST BROKE\n");
+	return (1);
+}
+
+int		exec_cd(char **cmd)
+{
+	char	*dir;
+	char	*home;
+	char	cwd[1024];
 
 	home = get_env("HOME=");
 	if (cmd[1] == NULL || (ft_strcmp(cmd[1], "~") == 0))
-	{
-		reset_env("OLDPWD", getcwd(cwd, sizeof(cwd)));
-		if (chdir(home) != 0)
-			ft_putstr("HOME JUST BROKE\n");
-	}
+		exec_path(home);
 	else if ((ft_strchr(cmd[1], '~') != NULL) && (ft_strlen(cmd[1]) > 1))
 	{
 		reset_env("OLDPWD", getcwd(cwd, sizeof(cwd)));
@@ -34,26 +40,21 @@ int exec_cd(char **cmd)
 		free(dir);
 	}
 	else if (ft_strcmp(cmd[1], "-") == 0)
-	{
 		exec_prev();
-	}
-	else 
-	{
-		reset_env("OLDPWD", getcwd(cwd, sizeof(cwd)));
-		if (chdir(cmd[1]) != 0)
-			ft_putstr("SHIT JUST BROKE\n");
-	}
+	else
+		exec_path(cmd[1]);
 	reset_env("PWD", getcwd(cwd, sizeof(cwd)));
 	free_er(cmd);
+	free(home);
 	return (1);
 }
 
-int exec_tilda(char **cmd)
+int		exec_tilda(char **cmd)
 {
-	char *home;
-	char *dir;
-	char *temp;
-	char *path;
+	char	*home;
+	char	*dir;
+	char	*temp;
+	char	*path;
 
 	home = get_env("HOME=");
 	if (ft_strlen(cmd[0]) > 1)
@@ -64,16 +65,14 @@ int exec_tilda(char **cmd)
 		free(dir);
 		free(temp);
 		free(home);
-		if (chdir(path) != 0)
-			ft_putstr("TILDA PATH JUST BROKE\n");
+		exec_path(path);
 		free(path);
 		free_er(cmd);
 		return (1);
 	}
 	else
 	{
-		if (chdir(home) != 0)
-			ft_putstr("TILDA PATH JUST BROKE\n");
+		exec_path(home);
 		free(home);
 		free_er(cmd);
 		return (1);
@@ -81,11 +80,11 @@ int exec_tilda(char **cmd)
 	return (0);
 }
 
-void exec_prev(void)
+void	exec_prev(void)
 {
-	int i;
-	char *temp;
-	char cwd[1024];
+	int		i;
+	char	*temp;
+	char	cwd[1024];
 
 	i = 0;
 	temp = ft_strdup(getcwd(cwd, sizeof(cwd)));

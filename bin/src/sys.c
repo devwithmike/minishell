@@ -6,29 +6,27 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 08:57:50 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/12 15:35:21 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/15 14:43:12 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int exec_sys(char **cmd)
+int	exec_sys(char **cmd)
 {
 	char		*temp;
 	struct stat	info;
-	char *path;
+	char		*path;
 
 	path = get_path(cmd[0]);
 	if (path != NULL && cmd[0][0] != '~')
 		return (sys_call(cmd, path));
 	if (lstat(cmd[0], &info) != -1)
-	{
 		if (S_ISREG(info.st_mode))
 		{
 			temp = ft_strdup(cmd[0]);
-			return(sys_call(cmd, temp));
+			return (sys_call(cmd, temp));
 		}
-	}
 	ft_putstr("minishell: command not found: ");
 	ft_putendl(cmd[0]);
 	if (cmd)
@@ -36,7 +34,7 @@ int exec_sys(char **cmd)
 	return (0);
 }
 
-int				sys_call(char **cmd, char *path)
+int	sys_call(char **cmd, char *path)
 {
 	pid_t		pid;
 

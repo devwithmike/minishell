@@ -6,13 +6,13 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 13:37:22 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/12 14:44:34 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/15 14:45:12 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int exec_echo(char **cmd)
+int	exec_echo(char **cmd)
 {
 	int i;
 
