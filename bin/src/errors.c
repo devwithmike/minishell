@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands.c                                         :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/12 14:15:05 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/16 08:30:30 by mimeyer          ###   ########.fr       */
+/*   Created: 2019/08/16 08:35:18 by mimeyer           #+#    #+#             */
+/*   Updated: 2019/08/16 09:18:06 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int exec_help(void)
+void	error_found(char *path, char *cmd)
 {
-	ft_putendl("THIS IS THE HELP CMD");
-	return (1);
+	struct stat	sb;
+	
+	stat(path, &sb);
+	if (S_ISREG(sb.st_mode))
+	{
+		ft_putstr(cmd);
+		ft_putstr(": not a directory: ");
+		ft_putendl(path);
+	}
+	else
+	{
+		ft_putstr(cmd);
+		ft_putstr(": no such file or directory: ");
+		ft_putendl(path);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:25:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/15 16:00:26 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/16 08:59:55 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,7 @@ char	*do_path(char *bin, char *com);
 char	*get_env(char *str);
 void	exec_path(char *path);
 void	exec_env(char **cmd);
+int		exec_help(void);
+void	error_found(char *path, char *cmd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 08:29:40 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/15 16:02:26 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/16 09:17:59 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	exec_path(char *path)
 
 	reset_env("OLDPWD", getcwd(cwd, sizeof(cwd)));
 	if (chdir(path) != 0)
-		ft_putstr("PATH JUST BROKE\n");
+		error_found(path, "cd");
 }
 
 void	exec_env(char **cmd)
@@ -49,7 +49,7 @@ int		exec_cd(char **cmd)
 		reset_env("OLDPWD", getcwd(cwd, sizeof(cwd)));
 		dir = ft_strjoin(home, ft_strchr(cmd[1], '~') + 1);
 		if (chdir(dir) != 0)
-			ft_putstr("HOME PATH JUST BROKE\n");
+			error_found(dir, "cd");
 		free(dir);
 	}
 	else if (ft_strcmp(cmd[1], "-") == 0)
@@ -92,22 +92,15 @@ int		exec_tilda(char **cmd)
 
 void	exec_prev(void)
 {
-	int		i;
 	char	*temp;
 	char	cwd[1024];
+	char	*dir;
 
-	i = 0;
 	temp = ft_strdup(getcwd(cwd, sizeof(cwd)));
-	while (m_env[i])
-	{
-		if (ft_strncmp(m_env[i], "OLDPWD=", 7) == 0)
-		{
-			if (chdir(ft_strsub(m_env[i], 7, ft_strlen(m_env[i]) - 7)) != 0)
-				ft_putstr("BACK JUST BROKE\n");
-			break ;
-		}
-		i++;
-	}
+	dir = get_env("OLDPWD");
+	if (chdir(dir) != 0)
+		error_found(dir, "cd");
 	reset_env("OLDPWD", temp);
+	free(dir);
 	free(temp);
 }

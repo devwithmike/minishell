@@ -10,7 +10,9 @@ SRCS =	minishell.c \
 		env.c \
 		sys.c \
 		echo.c \
-		path.c
+		path.c \
+		commands.c \
+		errors.c
 
 FLAGS = -Wall -Werror -Wextra
 
