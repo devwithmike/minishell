@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 08:35:18 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/16 09:18:06 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/16 14:45:55 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,20 @@ void	error_found(char *path, char *cmd)
 		ft_putstr(": no such file or directory: ");
 		ft_putendl(path);
 	}
+}
+
+int	error_params(char **cmd, int i)
+{
+	if (i < 0)
+	{
+		ft_putstr(cmd[0]);
+		ft_putendl(": to few arguments");
+	}
+	else
+	{
+		ft_putstr(cmd[0]);
+		ft_putendl(": to many arguments");
+	}
+	free_er(cmd);
+	return (0);
 }

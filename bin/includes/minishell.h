@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:25:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/16 10:08:12 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/16 14:46:33 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		execute_args(char **cmds);
 int		exec_tilda(char **cmd);
 int		check_sys(char **cmd);
 int		exec_cd(char **cmd);
-void	free_her(char **str);
+void	free_er(char **str);
 void	print_path(void);
 int		print_env(char **cmd);
 void	pop_env(char **env);
@@ -44,5 +44,6 @@ void	exec_path(char *path);
 void	exec_env(char **cmd);
 int		exec_help(void);
 void	error_found(char *path, char *cmd);
+int		error_params(char **cmd, int i);
 
 #endif
