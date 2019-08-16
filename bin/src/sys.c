@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 08:57:50 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/15 14:43:12 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/16 10:01:21 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	exec_sys(char **cmd)
 	ft_putstr("minishell: command not found: ");
 	ft_putendl(cmd[0]);
 	if (cmd)
-		free_er(cmd);
+		free_her(cmd);
 	return (0);
 }
 
@@ -56,6 +56,6 @@ int	sys_call(char **cmd, char *path)
 	else
 		wait(&pid);
 	free(path);
-	free_er(cmd);
+	free_her(cmd);
 	return (1);
 }

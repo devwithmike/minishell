@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:29:35 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/15 15:08:55 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/16 10:10:42 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		print_env(char **cmd)
 		ft_putendl(m_env[i]);
 		i++;
 	}
-	free_er(cmd);
+	free_her(cmd);
 	return (1);
 }
 
@@ -76,24 +76,25 @@ int		set_env(char **cmd)
 	i = 0;
 	if (reset_env(cmd[1], cmd[2]))
 	{
-		free_er(cmd);
+		free_her(cmd);
 		return (1);
 	}
 	while (m_env[i])
 		i++;
 	temp = (char **)malloc((sizeof(char *) * (i + 2)));
+	temp[i] = NULL;
 	i = -1;
 	while (m_env[++i])
 		temp[i] = ft_strdup(m_env[i]);
 	temp_key = ft_strjoin(cmd[1], "=");
 	temp_rule = ft_strjoin(temp_key, cmd[2]);
 	free(temp_key);
-	free_er(cmd);
+	free_her(cmd);
 	temp[i] = ft_strdup(temp_rule);
 	free(temp_rule);
-	free_er(m_env);
+	free_her(m_env);
 	pop_env(temp);
-	free_er(temp);
+	free_her(temp);
 	return (1);
 }
 
@@ -107,7 +108,7 @@ int		unset_env(char **cmd)
 		if (ft_strncmp(m_env[i], cmd[1], ft_strlen(cmd[1])) == 0)
 		{
 			ft_strdel(&m_env[i]);
-			free_er(cmd);
+			free_her(cmd);
 			return (1);
 		}
 		i++;

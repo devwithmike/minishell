@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:26:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/16 08:27:25 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/16 10:01:21 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int		main(int ac, char **av, char **env)
 		commands = ft_strsplit(line, ';');
 		free(line);
 		i = execute_args(commands);
-		free_er(commands);
+		free_her(commands);
 	}
-	free_er(m_env);
+	free_her(m_env);
 }
