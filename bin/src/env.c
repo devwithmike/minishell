@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:29:35 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/16 14:49:09 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/16 15:19:02 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,19 +85,21 @@ int		set_env(char **cmd)
 	}
 	while (m_env[i])
 		i++;
-	temp = (char **)malloc((sizeof(char *) * (i + 2)));
+	i++;
+	temp = (char **)malloc((sizeof(char *) * (i + 1)));
+	temp[i] = 0;
 	i = -1;
 	while (m_env[++i])
 		temp[i] = ft_strdup(m_env[i]);
+	free_er(m_env);
 	temp_key = ft_strjoin(cmd[1], "=");
 	temp_rule = ft_strjoin(temp_key, cmd[2]);
 	free(temp_key);
 	free_er(cmd);
 	temp[i] = ft_strdup(temp_rule);
 	free(temp_rule);
-	free_er(m_env);
-	pop_env(temp);
-	free_er(temp);
+	//pop_env(temp);
+	m_env = temp;
 	return (1);
 }
 
