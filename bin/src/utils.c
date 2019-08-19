@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 08:52:50 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/15 14:50:37 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/19 13:18:25 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ char	*end_quote(char *str, char q)
 		if ((ptr = ft_strchr(ptr, q)) == NULL)
 		{
 			if (q == '"')
-				str2 = readline("\033[1;35mdquote$>\033[0m");
+				str2 = readline("\033[1;35mdquote$> \033[0m");
 			else
-				str2 = readline("\033[1;35mquote$>\033[0m");
+				str2 = readline("\033[1;35mquote$> \033[0m");
 			temp = ft_strjoin(str, "\n");
 			ft_strdel(&str);
 			str = ft_strjoin(temp, str2);

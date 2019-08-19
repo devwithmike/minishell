@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:26:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/16 08:27:25 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/19 13:09:47 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int		check_sys(char **cmd)
 		return (exec_echo(cmd));
 	else if (ft_strequ(cmd[0], "help"))
 		return (exec_help());
+	else if (ft_strequ(cmd[0], "author"))
+		return (exec_author());
 	else if (cmd[0][0] == '~')
 		return (exec_tilda(cmd));
 	else if (exec_sys(cmd) == 1)
@@ -74,6 +76,16 @@ int		execute_args(char **cmds)
 	return (1);
 }
 
+void handle_sigint(int sig)
+{
+	if (sig == SIGINT)
+	{
+		ft_putchar('\n');
+		signal(SIGINT, handle_sigint);
+		print_path();
+	}
+}
+
 int		main(int ac, char **av, char **env)
 {
 	int		i;
@@ -87,7 +99,8 @@ int		main(int ac, char **av, char **env)
 	while (i)
 	{
 		print_path();
-		line = readline("$>\033[0m");
+		signal(SIGINT, handle_sigint);
+		line = readline(" ");
 		if (ft_strchr(line, '"') != NULL)
 			line = end_quote(line, '"');
 		else if (ft_strchr(line, '\'') != NULL)

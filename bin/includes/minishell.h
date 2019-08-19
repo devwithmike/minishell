@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:25:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/16 14:46:33 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/19 13:06:26 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <sys/stat.h>
+# include <signal.h>
 
 char	**m_env;
 
@@ -45,5 +46,8 @@ void	exec_env(char **cmd);
 int		exec_help(void);
 void	error_found(char *path, char *cmd);
 int		error_params(char **cmd, int i);
+int		exec_author(void);
+void	proc_signal_handler(int signo);
+void	handle_sigint(int sig);
 
 #endif

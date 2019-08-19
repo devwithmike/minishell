@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:15:05 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/16 08:30:30 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/19 10:16:37 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,12 @@
 int exec_help(void)
 {
 	ft_putendl("THIS IS THE HELP CMD");
+	return (1);
+}
+
+int exec_author(void)
+{
+	ft_putendl("MikeFMeyer");
+	ft_putendl("https://github.com/MikeFMeyer");
 	return (1);
 }

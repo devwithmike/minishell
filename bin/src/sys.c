@@ -6,13 +6,22 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 08:57:50 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/15 14:43:12 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/19 13:10:14 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	exec_sys(char **cmd)
+void	proc_signal_handler(int signo)
+{
+	if (signo == SIGINT)
+	{
+		ft_putstr("\n");
+		signal(SIGINT, proc_signal_handler);
+	}
+}
+
+int		exec_sys(char **cmd)
 {
 	char		*temp;
 	struct stat	info;
@@ -34,10 +43,11 @@ int	exec_sys(char **cmd)
 	return (0);
 }
 
-int	sys_call(char **cmd, char *path)
+int		sys_call(char **cmd, char *path)
 {
 	pid_t		pid;
 
+	signal(SIGINT, proc_signal_handler);
 	pid = fork();
 	if (!pid)
 	{
