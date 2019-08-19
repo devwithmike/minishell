@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 08:52:50 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/19 13:18:25 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/19 13:48:35 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,16 @@ char	*end_quote(char *str, char q)
 			ptr++;
 	}
 	return (str);
+}
+
+void	zsh_level(void)
+{
+	char		*temp;
+	char		*lvl;
+
+	temp = get_env("SHLVL");
+	lvl = ft_itoa(ft_atoi(temp) + 1);
+	reset_env("SHLVL", lvl);
+	free(temp);
+	free(lvl);
 }

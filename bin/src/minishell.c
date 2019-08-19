@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:26:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/19 13:09:47 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/19 13:48:51 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int		main(int ac, char **av, char **env)
 	(void)av;
 	i = 1;
 	pop_env(env);
+	zsh_level();
 	while (i)
 	{
 		print_path();

@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:25:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/19 13:06:26 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/19 13:44:34 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ int		error_params(char **cmd, int i);
 int		exec_author(void);
 void	proc_signal_handler(int signo);
 void	handle_sigint(int sig);
+void	zsh_level(void);
 
 #endif

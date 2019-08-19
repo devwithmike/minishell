@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:29:35 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/16 15:19:02 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/19 13:44:08 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int		set_env(char **cmd)
 	free_er(cmd);
 	temp[i] = ft_strdup(temp_rule);
 	free(temp_rule);
-	//pop_env(temp);
 	m_env = temp;
 	return (1);
 }
