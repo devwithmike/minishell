@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 08:57:50 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/20 08:23:33 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/20 09:31:21 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int		sys_call(char **cmd, char *path)
 		{
 			ft_putstr("minishell: premission denied: ");
 			ft_putendl(path);
+			exit(-1);
 		}
-		exit(-1);
 	}
 	else if (pid < 0)
 	{
@@ -66,8 +66,6 @@ int		sys_call(char **cmd, char *path)
 	}
 	else
 		wait(&pid);
-	execve(path, cmd, m_env);
-	wait(&pid);
 	free(path);
 	free_er(cmd);
 	return (1);
