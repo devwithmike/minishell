@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 08:57:50 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/20 09:31:21 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/20 10:58:14 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ int		exec_sys(char **cmd)
 	char		*path;
 
 	path = get_path(cmd[0]);
-	if (path != NULL && cmd[0][0] != '~')
+	if (path != NULL && cmd[0][0] != '~' && cmd[0][0] != '.')
 		return (sys_call(cmd, path));
 	if (lstat(cmd[0], &info) != -1)
 		if (S_ISREG(info.st_mode))
 		{
+			ft_strdel(&temp);
 			temp = ft_strdup(cmd[0]);
 			return (sys_call(cmd, temp));
 		}
@@ -40,6 +41,7 @@ int		exec_sys(char **cmd)
 	ft_putendl(cmd[0]);
 	if (cmd)
 		free_er(cmd);
+	free(path);
 	return (0);
 }
 

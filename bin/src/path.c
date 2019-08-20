@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 14:49:29 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/20 09:54:08 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/20 10:54:26 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_path(char *com)
 	i = -1;
 	temp = get_env("PATH=");
 	bin = ft_strsplit(temp, ':');
-	ft_strdel(&temp);
+	free(temp);
 	while (bin && bin[++i])
 	{
 		path = do_path(bin[i], com);
@@ -45,9 +45,14 @@ char	*do_path(char *bin, char *com)
 	char	*temp;
 	char	*path;
 
-	temp = ft_strjoin(bin, "/");
-	path = ft_strjoin(temp, com);
-	ft_strdel(&temp);
+	if (ft_strstr(bin, com) != NULL)
+		path = ft_strdup(com);
+	else
+	{
+		temp = ft_strjoin(bin, "/");
+		path = ft_strjoin(temp, com);
+		free(temp);
+	}
 	return (path);
 }
 
