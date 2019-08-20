@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 08:57:50 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/20 10:58:14 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/20 11:08:55 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	proc_signal_handler(int signo)
 
 int		exec_sys(char **cmd)
 {
-	char		*temp;
 	struct stat	info;
 	char		*path;
 
@@ -33,15 +32,15 @@ int		exec_sys(char **cmd)
 	if (lstat(cmd[0], &info) != -1)
 		if (S_ISREG(info.st_mode))
 		{
-			ft_strdel(&temp);
-			temp = ft_strdup(cmd[0]);
-			return (sys_call(cmd, temp));
+			ft_strdel(&path);
+			path = ft_strdup(cmd[0]);
+			return (sys_call(cmd, path));
 		}
 	ft_putstr("minishell: command not found: ");
 	ft_putendl(cmd[0]);
 	if (cmd)
 		free_er(cmd);
-	free(path);
+	ft_strdel(&path);
 	return (0);
 }
 
@@ -68,7 +67,7 @@ int		sys_call(char **cmd, char *path)
 	}
 	else
 		wait(&pid);
-	free(path);
+	ft_strdel(&path);
 	free_er(cmd);
 	return (1);
 }

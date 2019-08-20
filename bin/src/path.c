@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 14:49:29 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/20 10:54:26 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/20 11:04:31 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_path(char *com)
 	i = -1;
 	temp = get_env("PATH=");
 	bin = ft_strsplit(temp, ':');
-	free(temp);
+	ft_strdel(&temp);
 	while (bin && bin[++i])
 	{
 		path = do_path(bin[i], com);
