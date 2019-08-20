@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 14:49:29 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/19 12:59:16 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/20 09:54:08 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,9 @@ char	*do_path(char *bin, char *com)
 	char	*temp;
 	char	*path;
 
-	if (ft_strstr(bin, com) != NULL)
-		path = ft_strdup(com);
-	else
-	{
-		temp = ft_strjoin(bin, "/");
-		path = ft_strjoin(temp, com);
-		ft_strdel(&temp);
-	}
+	temp = ft_strjoin(bin, "/");
+	path = ft_strjoin(temp, com);
+	ft_strdel(&temp);
 	return (path);
 }
 
