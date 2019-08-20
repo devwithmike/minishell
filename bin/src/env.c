@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:29:35 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/19 13:44:08 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/20 11:26:37 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		print_env(char **cmd)
 		ft_putendl(m_env[i]);
 		i++;
 	}
-	free_er(cmd);
+	free_her(cmd);
 	return (1);
 }
 
@@ -70,8 +70,6 @@ int		set_env(char **cmd)
 {
 	int		i;
 	char	**temp;
-	char	*temp_key;
-	char	*temp_rule;
 
 	i = 0;
 	if (cmd[1] == NULL || cmd[2] == NULL)
@@ -80,7 +78,7 @@ int		set_env(char **cmd)
 		return (error_params(cmd, 1));
 	if (reset_env(cmd[1], cmd[2]))
 	{
-		free_er(cmd);
+		free_her(cmd);
 		return (1);
 	}
 	while (m_env[i])
@@ -88,24 +86,13 @@ int		set_env(char **cmd)
 	i++;
 	temp = (char **)malloc((sizeof(char *) * (i + 1)));
 	temp[i] = 0;
-	i = -1;
-	while (m_env[++i])
-		temp[i] = ft_strdup(m_env[i]);
-	free_er(m_env);
-	temp_key = ft_strjoin(cmd[1], "=");
-	temp_rule = ft_strjoin(temp_key, cmd[2]);
-	free(temp_key);
-	free_er(cmd);
-	temp[i] = ft_strdup(temp_rule);
-	free(temp_rule);
-	m_env = temp;
-	return (1);
+	return (preform_set(temp, cmd));
 }
 
 int		unset_env(char **cmd)
 {
-	int i;
-	char *temp;
+	int		i;
+	char	*temp;
 
 	i = 0;
 	if (cmd[1] && cmd[2])
@@ -121,7 +108,7 @@ int		unset_env(char **cmd)
 		if (ft_strncmp(m_env[i], temp, ft_strlen(temp)) == 0)
 		{
 			ft_strdel(&m_env[i]);
-			free_er(cmd);
+			free_her(cmd);
 			free(temp);
 			return (1);
 		}

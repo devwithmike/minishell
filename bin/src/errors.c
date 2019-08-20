@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 08:35:18 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/16 14:45:55 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/20 11:16:55 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	error_found(char *path, char *cmd)
 {
 	struct stat	sb;
-	
+
 	stat(path, &sb);
 	if (S_ISREG(sb.st_mode))
 	{
@@ -31,7 +31,7 @@ void	error_found(char *path, char *cmd)
 	}
 }
 
-int	error_params(char **cmd, int i)
+int		error_params(char **cmd, int i)
 {
 	if (i < 0)
 	{
@@ -43,6 +43,6 @@ int	error_params(char **cmd, int i)
 		ft_putstr(cmd[0]);
 		ft_putendl(": to many arguments");
 	}
-	free_er(cmd);
+	free_her(cmd);
 	return (0);
 }

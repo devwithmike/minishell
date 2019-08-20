@@ -6,13 +6,13 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 08:52:50 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/19 13:48:35 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/20 11:28:28 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	free_er(char **str)
+void	free_her(char **str)
 {
 	int	i;
 
@@ -75,4 +75,24 @@ void	zsh_level(void)
 	reset_env("SHLVL", lvl);
 	free(temp);
 	free(lvl);
+}
+
+int		preform_set(char **temp, char **cmd)
+{
+	char	*temp_key;
+	char	*temp_rule;
+	int		i;
+
+	i = -1;
+	while (m_env[++i])
+		temp[i] = ft_strdup(m_env[i]);
+	free_her(m_env);
+	temp_key = ft_strjoin(cmd[1], "=");
+	temp_rule = ft_strjoin(temp_key, cmd[2]);
+	free(temp_key);
+	free_her(cmd);
+	temp[i] = ft_strdup(temp_rule);
+	free(temp_rule);
+	m_env = temp;
+	return (1);
 }

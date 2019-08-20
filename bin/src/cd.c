@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 08:29:40 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/16 09:17:59 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/20 11:16:55 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		exec_cd(char **cmd)
 	else
 		exec_path(cmd[1]);
 	reset_env("PWD", getcwd(cwd, sizeof(cwd)));
-	free_er(cmd);
+	free_her(cmd);
 	free(home);
 	return (1);
 }
@@ -77,14 +77,14 @@ int		exec_tilda(char **cmd)
 		free(home);
 		exec_path(path);
 		free(path);
-		free_er(cmd);
+		free_her(cmd);
 		return (1);
 	}
 	else
 	{
 		exec_path(home);
 		free(home);
-		free_er(cmd);
+		free_her(cmd);
 		return (1);
 	}
 	return (0);

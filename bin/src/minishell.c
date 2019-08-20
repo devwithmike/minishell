@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:26:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/19 13:48:51 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/20 11:16:55 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		execute_args(char **cmds)
 	return (1);
 }
 
-void handle_sigint(int sig)
+void	handle_sigint(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -110,7 +110,7 @@ int		main(int ac, char **av, char **env)
 		commands = ft_strsplit(line, ';');
 		free(line);
 		i = execute_args(commands);
-		free_er(commands);
+		free_her(commands);
 	}
-	free_er(m_env);
+	free_her(m_env);
 }

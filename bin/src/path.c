@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 14:49:29 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/20 11:04:31 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/20 11:16:55 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ char	*get_path(char *com)
 			free(path);
 		else
 		{
-			free_er(bin);
+			free_her(bin);
 			return (path);
 		}
 	}
 	if (bin != NULL)
-		free_er(bin);
+		free_her(bin);
 	return (NULL);
 }
 

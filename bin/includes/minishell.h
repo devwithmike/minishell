@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 09:25:23 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/20 10:16:16 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/20 11:26:21 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		execute_args(char **cmds);
 int		exec_tilda(char **cmd);
 int		check_sys(char **cmd);
 int		exec_cd(char **cmd);
-void	free_er(char **str);
+void	free_her(char **str);
 void	print_path(void);
 int		print_env(char **cmd);
 void	pop_env(char **env);
@@ -50,5 +50,6 @@ int		exec_author(void);
 void	proc_signal_handler(int signo);
 void	handle_sigint(int sig);
 void	zsh_level(void);
+int		preform_set(char **temp, char **cmd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mimeyer <mimeyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 13:37:22 by mimeyer           #+#    #+#             */
-/*   Updated: 2019/08/16 08:18:27 by mimeyer          ###   ########.fr       */
+/*   Updated: 2019/08/20 11:16:55 by mimeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	exec_echo(char **cmd)
 {
-	int i;
-	char *temp;
+	int		i;
+	char	*temp;
 
 	i = 1;
 	while (cmd[i])
@@ -34,6 +34,6 @@ int	exec_echo(char **cmd)
 			ft_putchar(' ');
 		i++;
 	}
-	free_er(cmd);
+	free_her(cmd);
 	return (1);
 }
