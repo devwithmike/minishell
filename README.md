@@ -17,7 +17,7 @@ Clone the repo:
   
 ```
 git clone https://github.com/mikefmeyer/minishell  
-cd Minishell/Minishell
+cd minishell/bin/
 ```  
 Run the following to build the binary: ```make```  
   
